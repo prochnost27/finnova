@@ -18,7 +18,7 @@ function Download() {
         <div className="bg-white p-10 rounded-3xl shadow-2xl">
 
           <QRCodeCanvas
-            value="https://TUAPP.vercel.app"
+            value="https://finnova-haln.vercel.app"
             size={320}
           />
 
