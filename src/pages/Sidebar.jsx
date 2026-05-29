@@ -1,76 +1,308 @@
-import { useNavigate } from "react-router-dom"
 import {
-  FaChartPie,
-  FaHistory,
-  FaBalanceScale,
-  FaDownload,
-  FaCalculator
-} from "react-icons/fa"
 
-function Sidebar() {
+  LayoutDashboard,
+  Calculator,
+  BarChart3,
+  History,
+  Download,
+  CreditCard,
+  LogOut,
+  Menu
+
+} from "lucide-react"
+
+import {
+
+  Link,
+  useNavigate
+
+} from "react-router-dom"
+
+function Sidebar({ open, setOpen }) {
 
   const navigate = useNavigate()
 
+
+
+
+
+
+
+  const cerrarSidebar = () => {
+
+  setOpen(false)
+
+}
+
+
+
+
+
+
+
+  const logout = () => {
+
+    localStorage.removeItem("usuario")
+
+    navigate("/")
+
+  }
+
+
+
+
+
+
+
   return (
 
-    <div className="w-72 bg-gradient-to-b from-black via-gray-900 to-cyan-950 text-white min-h-screen p-8 shadow-2xl">
+    <>
 
-      <h1 className="text-5xl font-extrabold mb-14 tracking-wide text-cyan-400">
-        FinNova
-      </h1>
+      <div className="fixed top-0 left-0 right-0 h-[90px] bg-[#0b0b0b] border-b border-[#1f1f1f] flex items-center justify-between px-8 z-50">
 
-      <div className="flex flex-col gap-6 text-lg">
+        <div className="flex items-center gap-6">
 
-        <button
-          onClick={() => navigate("/dashboard")}
-          className="flex items-center gap-4 bg-white/5 hover:bg-cyan-500 transition p-4 rounded-2xl"
-        >
-          <FaChartPie />
-          Dashboard
-        </button>
+          <button
+            onClick={() => setOpen(!open)}
+            className="bg-[#151515] hover:bg-[#1f1f1f] transition p-4 rounded-2xl"
+          >
 
-        <button
-          onClick={() => navigate("/simulator")}
-          className="flex items-center gap-4 bg-white/5 hover:bg-cyan-500 transition p-4 rounded-2xl"
-        >
-          <FaCalculator />
-          Simulador
-        </button>
+            <Menu size={28} />
 
-        <button
-          onClick={() => navigate("/history")}
-          className="flex items-center gap-4 bg-white/5 hover:bg-cyan-500 transition p-4 rounded-2xl"
-        >
-          <FaHistory />
-          Historial
-        </button>
+          </button>
 
-        <button
-          onClick={() => navigate("/compare")}
-          className="flex items-center gap-4 bg-white/5 hover:bg-cyan-500 transition p-4 rounded-2xl"
-        >
-          <FaBalanceScale />
-          Comparador
-        </button>
 
-        <button
-          onClick={() => navigate("/download")}
-          className="flex items-center gap-4 bg-white/5 hover:bg-cyan-500 transition p-4 rounded-2xl"
-        >
-          <FaDownload />
-          Descargar App
-        </button>
+
+
+
+
+
+
+
+
+
+          <h1 className="text-4xl font-black text-white">
+
+            Fin<span className="text-yellow-500">Nova</span>
+
+          </h1>
+
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+        <div className="flex items-center gap-4">
+
+          <div className="bg-green-500 w-4 h-4 rounded-full animate-pulse" />
+
+
+
+
+
+
+
+          <p className="text-gray-400 text-lg">
+
+            Sistema Activo
+
+          </p>
+
+        </div>
 
       </div>
 
-      <button
-        onClick={() => navigate("/")}
-        className="mt-20 w-full bg-red-500 hover:bg-red-600 transition p-4 rounded-2xl font-bold"
-      >
-        Cerrar Sesión
-      </button>
 
-    </div>
+
+
+
+
+
+
+
+      <div className={`fixed top-[90px] left-0 h-[calc(100vh-90px)] bg-[#0a0a0a] border-r border-[#1f1f1f] transition-all duration-300 z-40
+
+      ${open ? "w-[300px]" : "w-0 overflow-hidden"}`}>
+
+
+
+
+
+
+
+
+
+        <div className="p-6 flex flex-col justify-between h-full">
+
+          <div className="space-y-4">
+
+            <Link
+              to="/dashboard"
+              onClick={cerrarSidebar}
+              className="flex items-center gap-5 p-5 rounded-2xl hover:bg-[#151515] transition text-xl"
+            >
+
+              <LayoutDashboard
+                className="text-yellow-500"
+              />
+
+              Dashboard
+
+            </Link>
+
+
+
+
+
+
+
+
+
+
+
+            <Link
+              to="/simulator"
+              onClick={cerrarSidebar}
+              className="flex items-center gap-5 p-5 rounded-2xl hover:bg-[#151515] transition text-xl"
+            >
+
+              <Calculator
+                className="text-yellow-500"
+              />
+
+              Simulador
+
+            </Link>
+
+
+
+
+
+
+
+
+
+
+
+            <Link
+              to="/compare"
+              onClick={cerrarSidebar}
+              className="flex items-center gap-5 p-5 rounded-2xl hover:bg-[#151515] transition text-xl"
+            >
+
+              <BarChart3
+                className="text-yellow-500"
+              />
+
+              Comparador
+
+            </Link>
+
+
+
+
+
+
+
+
+
+
+
+            <Link
+              to="/history"
+              onClick={cerrarSidebar}
+              className="flex items-center gap-5 p-5 rounded-2xl hover:bg-[#151515] transition text-xl"
+            >
+
+              <History
+                className="text-yellow-500"
+              />
+
+              Historial
+
+            </Link>
+
+
+
+
+
+
+
+
+
+
+
+            <Link
+              to="/cardscore"
+              onClick={cerrarSidebar}
+              className="flex items-center gap-5 p-5 rounded-2xl hover:bg-[#151515] transition text-xl"
+            >
+
+              <CreditCard
+                className="text-yellow-500"
+              />
+
+              Tarjetas
+
+            </Link>
+
+
+
+
+
+
+
+
+
+
+
+            <Link
+              to="/download"
+              onClick={cerrarSidebar}
+              className="flex items-center gap-5 p-5 rounded-2xl hover:bg-[#151515] transition text-xl"
+            >
+
+              <Download
+                className="text-yellow-500"
+              />
+
+              Descargar
+
+            </Link>
+
+          </div>
+
+
+
+
+
+
+
+
+
+          <button
+            onClick={logout}
+            className="flex items-center gap-5 p-5 rounded-2xl hover:bg-red-500/10 text-red-400 transition text-xl"
+          >
+
+            <LogOut />
+
+            Cerrar Sesión
+
+          </button>
+
+        </div>
+
+      </div>
+
+    </>
 
   )
 

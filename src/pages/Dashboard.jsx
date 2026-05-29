@@ -1,108 +1,677 @@
+import { useState } from "react"
+
 import Sidebar from "./Sidebar"
 
 import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  Tooltip,
-  ResponsiveContainer
-} from "recharts"
 
-import { motion } from "framer-motion"
+  TrendingUp,
+  Landmark,
+  ShieldCheck,
+  Wallet,
+  BadgeDollarSign,
+  Activity
+
+} from "lucide-react"
 
 function Dashboard() {
 
-  const data = [
-    { mes: "Ene", prestamos: 4 },
-    { mes: "Feb", prestamos: 7 },
-    { mes: "Mar", prestamos: 12 },
-    { mes: "Abr", prestamos: 9 },
-    { mes: "May", prestamos: 16 }
-  ]
+  const [open, setOpen] = useState(false)
+
+
+
+
+
+
+
+  const usuario =
+    JSON.parse(localStorage.getItem("usuario"))
+
+
+const bancos = [
+
+  {
+    nombre: "BAC",
+    tasa: usuario?.bac
+  },
+
+  {
+    nombre: "BI",
+    tasa: usuario?.bi
+  },
+
+  {
+    nombre: "Banrural",
+    tasa: usuario?.banrural
+  },
+
+  {
+    nombre: "Promerica",
+    tasa: usuario?.promerica
+  },
+
+  {
+    nombre: "Bam",
+    tasa: usuario?.bam
+  },
+
+  {
+    nombre: "Bantrab",
+    tasa: usuario?.bantrab
+  },
+
+  {
+    nombre: "Micoope",
+    tasa: usuario?.micoope
+  },
+
+  {
+    nombre: "Banco Antigua",
+    tasa: usuario?.antigua
+  },
+
+  {
+    nombre: "Interbanco",
+    tasa: usuario?.interbanco
+  },
+
+  {
+    nombre: "GyT Continental",
+    tasa: usuario?.gyt
+  },
+
+  {
+    nombre: "CHN",
+    tasa: usuario?.chn
+  }
+
+]
+
+const mejorBanco =
+
+  bancos.reduce(
+
+    (a, b) =>
+
+      a.tasa < b.tasa
+
+        ? a
+
+        : b
+
+  )
+
+
+
+
+
+  const riesgo =
+
+    usuario?.score >= 850
+
+      ? "Riesgo Muy Bajo"
+
+      :
+
+      usuario?.score >= 700
+
+        ? "Riesgo Bajo"
+
+        :
+
+        usuario?.score >= 550
+
+          ? "Riesgo Medio"
+
+          :
+
+          "Riesgo Alto"
+
+
+
+
+
+
 
   return (
 
-    <div className="flex bg-gradient-to-br from-gray-950 via-black to-cyan-950 min-h-screen text-white">
+    <div className="min-h-screen bg-[#050505] text-white">
 
-      <Sidebar />
+      <Sidebar
+        open={open}
+        setOpen={setOpen}
+      />
 
-      <div className="flex-1 p-10">
 
-        <h1 className="text-6xl font-extrabold mb-10 text-cyan-400">
-          Dashboard
-        </h1>
 
-        <div className="grid grid-cols-3 gap-8">
 
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            className="bg-gradient-to-r from-cyan-500 to-blue-700 p-8 rounded-3xl shadow-2xl"
-          >
-            <h2 className="text-3xl font-bold">
-              Simulaciones
-            </h2>
 
-            <p className="text-6xl mt-5 font-extrabold">
-              41
+
+
+      <div className={`pt-[120px] p-10 transition-all duration-300
+
+      ${open ? "ml-[300px]" : "ml-0"}`}>
+
+
+
+
+
+
+
+
+
+        <div className="flex items-center justify-between mb-12">
+
+          <div>
+
+            <h1 className="text-6xl font-black">
+
+              Panel Financiero
+
+            </h1>
+
+
+
+
+
+            <p className="text-gray-500 text-2xl mt-3">
+
+              Bienvenido,
+              {usuario?.nombre}
+
             </p>
-          </motion.div>
 
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            className="bg-gradient-to-r from-purple-500 to-pink-600 p-8 rounded-3xl shadow-2xl"
-          >
-            <h2 className="text-3xl font-bold">
-              Banco Ideal
-            </h2>
+          </div>
 
-            <p className="text-4xl mt-5 font-extrabold">
-              Banrural
+
+
+
+
+
+
+
+
+
+
+          <div className="bg-yellow-500 text-black px-8 py-5 rounded-3xl">
+
+            <p className="font-bold text-lg">
+
+              Score Financiero
+
             </p>
-          </motion.div>
 
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            className="bg-gradient-to-r from-green-500 to-emerald-700 p-8 rounded-3xl shadow-2xl"
-          >
-            <h2 className="text-3xl font-bold">
-              Promedio
-            </h2>
 
-            <p className="text-5xl mt-5 font-extrabold">
-              Q25K
-            </p>
-          </motion.div>
+
+
+
+            <h1 className="text-5xl font-black">
+
+              {usuario?.score}
+
+            </h1>
+
+          </div>
 
         </div>
 
-        <div className="bg-white/5 backdrop-blur-lg border border-white/10 mt-12 p-10 rounded-3xl shadow-2xl">
 
-          <h2 className="text-4xl font-bold mb-8">
-            Actividad Financiera
-          </h2>
 
-          <div style={{ width: "100%", height: 400 }}>
 
-            <ResponsiveContainer>
 
-              <BarChart data={data}>
 
-                <XAxis dataKey="mes" stroke="#ffffff" />
 
-                <YAxis stroke="#ffffff" />
 
-                <Tooltip />
 
-                <Bar
-                  dataKey="prestamos"
-                  fill="#06b6d4"
-                  radius={[15, 15, 0, 0]}
+        <div className="grid grid-cols-4 gap-8 mb-10">
+
+          <div className="bg-[#111111] border border-[#222] rounded-[30px] p-8">
+
+            <div className="flex items-center justify-between">
+
+              <p className="text-gray-500 text-lg">
+
+                Perfil
+
+              </p>
+
+
+
+
+
+              <ShieldCheck
+                className="text-yellow-500"
+              />
+
+            </div>
+
+
+
+
+
+            <h1 className="text-5xl font-black mt-8 text-yellow-500">
+
+              {usuario?.perfil}
+
+            </h1>
+
+          </div>
+
+
+
+
+
+
+
+
+
+
+
+          <div className="bg-[#111111] border border-[#222] rounded-[30px] p-8">
+
+            <div className="flex items-center justify-between">
+
+              <p className="text-gray-500 text-lg">
+
+                Banco Ideal
+
+              </p>
+
+
+
+
+
+              <Landmark
+                className="text-yellow-500"
+              />
+
+            </div>
+
+
+
+
+
+            <h1 className="text-4xl font-black mt-8 break-words text-white">
+
+              {mejorBanco.nombre}
+
+            </h1>
+
+          </div>
+
+
+
+
+
+
+
+
+
+
+
+          <div className="bg-[#111111] border border-[#222] rounded-[30px] p-8">
+
+            <div className="flex items-center justify-between">
+
+              <p className="text-gray-500 text-lg">
+
+                Riesgo
+
+              </p>
+
+
+
+
+
+              <Activity
+                className="text-yellow-500"
+              />
+
+            </div>
+
+
+
+
+
+            <h1 className="text-3xl font-black mt-8 text-red-400">
+
+              {riesgo}
+
+            </h1>
+
+          </div>
+
+
+
+
+
+
+
+
+
+
+
+          <div className="bg-[#111111] border border-[#222] rounded-[30px] p-8">
+
+            <div className="flex items-center justify-between">
+
+              <p className="text-gray-500 text-lg">
+
+                Ingresos
+
+              </p>
+
+
+
+
+
+              <Wallet
+                className="text-yellow-500"
+              />
+
+            </div>
+
+
+
+
+
+            <h1 className="text-4xl font-black mt-8 text-green-400">
+
+              Q{usuario?.ingresos}
+
+            </h1>
+
+          </div>
+
+        </div>
+
+
+
+
+
+
+
+
+
+        <div className="grid grid-cols-2 gap-10">
+
+          <div className="bg-[#111111] border border-[#222] rounded-[40px] p-10">
+
+            <div className="flex items-center gap-4 mb-10">
+
+              <TrendingUp
+                className="text-yellow-500"
+                size={35}
+              />
+
+
+
+
+
+              <h1 className="text-4xl font-black">
+
+                Tasas Bancarias
+
+              </h1>
+
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+            <div className="space-y-8">
+
+              {
+
+                bancos.map((item, index) => (
+
+                  <div key={index}>
+
+                    <div className="flex justify-between mb-3">
+
+                      <span className="text-xl">
+
+                        {item.nombre}
+
+                      </span>
+
+
+
+
+
+                      <span className="text-yellow-500 text-xl font-black">
+
+                        {item.tasa}%
+
+                      </span>
+
+                    </div>
+
+
+
+
+
+                    <div className="w-full h-4 bg-black rounded-full overflow-hidden">
+
+                      <div
+                        className="h-full rounded-full bg-gradient-to-r from-yellow-600 to-yellow-400"
+                        style={{
+                          width: `${100 - item.tasa * 4}%`
+                        }}
+                      />
+
+                    </div>
+
+                  </div>
+
+                ))
+
+              }
+
+            </div>
+
+          </div>
+
+
+
+
+
+
+
+
+
+          <div className="bg-[#111111] border border-[#222] rounded-[40px] p-10 flex flex-col justify-between">
+
+            <div>
+
+              <div className="flex items-center gap-4 mb-10">
+
+                <BadgeDollarSign
+                  className="text-yellow-500"
+                  size={35}
                 />
 
-              </BarChart>
 
-            </ResponsiveContainer>
+
+
+
+                <h1 className="text-4xl font-black">
+
+                  Resumen Financiero
+
+                </h1>
+
+              </div>
+
+
+
+
+
+
+
+
+
+
+
+              <div className="space-y-8 text-xl">
+
+                <div className="flex justify-between border-b border-[#222] pb-4">
+
+                  <span className="text-gray-500">
+
+                    Tipo de ingreso
+
+                  </span>
+
+
+
+
+
+                  <span className="font-bold">
+
+                    {usuario?.tipo_ingreso}
+
+                  </span>
+
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+                <div className="flex justify-between border-b border-[#222] pb-4">
+
+                  <span className="text-gray-500">
+
+                    Antigüedad
+
+                  </span>
+
+
+
+
+
+                  <span className="font-bold">
+
+                    {usuario?.antiguedad} años
+
+                  </span>
+
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+                <div className="flex justify-between border-b border-[#222] pb-4">
+
+                  <span className="text-gray-500">
+
+                    Clasificación
+
+                  </span>
+
+
+
+
+
+                  <span className="font-bold text-yellow-500">
+
+                    Cliente {usuario?.perfil}
+
+                  </span>
+
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+                <div className="flex justify-between border-b border-[#222] pb-4">
+
+                  <span className="text-gray-500">
+
+                    Mejor tasa
+
+                  </span>
+
+
+
+
+
+                  <span className="font-bold text-green-400">
+
+                    {mejorBanco.tasa}%
+
+                  </span>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+            <div className="mt-12 bg-black rounded-[30px] p-8 border border-[#222]">
+
+              <p className="text-gray-500 text-lg mb-4">
+
+                Recomendación Inteligente
+
+              </p>
+
+
+
+
+
+              <h1 className="text-3xl font-black leading-relaxed">
+
+                Tu mejor opción financiera
+                actualmente es
+
+                <span className="text-yellow-500">
+
+                  {" "}
+                  {mejorBanco.nombre}
+
+                </span>
+
+              </h1>
+
+            </div>
 
           </div>
 
