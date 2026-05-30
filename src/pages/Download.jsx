@@ -6,7 +6,7 @@ function Download() {
   const [open, setOpen] = useState(false)
 
   const descargarAPK = () => {
-    window.open("https://finnova-haln-k7uj5prat-fin-nova.vercel.app/", "_blank")
+    window.open("https://finnova-haln-493u5sjj8-fin-nova.vercel.app/", "_blank")
   }
 
   return (
@@ -69,7 +69,7 @@ function Download() {
               </p>
               <div className="bg-white p-4 md:p-6 rounded-[25px] md:rounded-[35px] inline-block mb-6 md:mb-10">
                 <img
-                  src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https://finnova-haln-k7uj5prat-fin-nova.vercel.app/"
+                  src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https://finnova-haln-493u5sjj8-fin-nova.vercel.app/"
                   alt="QR FinNova"
                   className="rounded-xl w-[150px] h-[150px] md:w-[220px] md:h-[220px]"
                 />
